@@ -3,37 +3,45 @@
 A Python wrapper for the [Pollster API](http://elections.huffingtonpost.com/pollster/api) 
 which provides access to political opinion polling data and trend estimates from The Huffington Post.
 
-    from pollster import Pollster
+## Installation
 
-    # instantiate
+    pip install pollster
+
+## Getting started
+
+    from pollster import Pollster
     pollster = Pollster()
 
-    charts = pollster.charts(topic='obama-job-approval')
-    chart = charts[0]
-    print chart
-    print chart.estimates_by_date()
+See the current estimate of the president's job approval
 
-    # access all charts
-    charts = pollster.charts()
-    for chart in charts:
-        print chart
+    chart = pollster.charts(topic='obama-job-approval')[0]
+    print chart.esimtates
 
-    # access charts for a specific topic
-    charts = pollster.charts(topic='obama-job-approval')
-    for chart in charts:
-        print chart
+List charts about 2012 Senate races
 
-    # access the polls for a chart
-    chart = charts[0]
-    print chart
-    polls = chart.polls()
-    for poll in polls:
-        print poll
+    pollster.charts(topic='2012-senate')
 
-    # page through polls
-    polls = chart.polls(page=2)
-    for poll in polls:
-        print poll
+List charts about Wisconsin
 
-    poll = polls[0]
-    print poll.questions
+    pollster.charts(state='WI')
+
+Calculate the margin between Obama and Romney from a recent general election poll
+
+    poll = pollster.polls(chart='2012-general-election-romney-vs-obama')[0]
+    question = [x for x in poll.questions if x['chart'] == '2012-general-election-romney-vs-obama'][0]
+    obama = [x for x in question['responses'] if x['choice'] == 'Obama'][0]
+    romney = [x for x in question['responses'] if x['choice'] == 'Romney'][0]
+    print obama['value'] - romney['value']
+
+See the methodology used in recent polls about the Affordable Care Act
+
+    chart = pollster.chart(slug='us-health-bill')
+    print [[x.pollster, x.method] for x in chart.polls()]
+
+## Authors
+
+- Aaron Bycoffe, bycoffe@huffingtonpost.com
+
+## Copyright
+
+Copyright © 2012 The Huffington Post. See LICENSE for details.
