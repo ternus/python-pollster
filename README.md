@@ -28,7 +28,7 @@ List charts about Wisconsin
 Calculate the margin between Obama and Romney from a recent general election poll
 
     poll = pollster.polls(chart='2012-general-election-romney-vs-obama')[0]
-    question = [x for x in poll.questions if x['chart'] == '2012-general-election-romney-vs-obama'][0]
+    question = [x['subpopulations'][0] for x in poll.questions if x['chart'] == '2012-general-election-romney-vs-obama'][0]
     obama = [x for x in question['responses'] if x['choice'] == 'Obama'][0]
     romney = [x for x in question['responses'] if x['choice'] == 'Romney'][0]
     print obama['value'] - romney['value']
