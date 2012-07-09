@@ -1,6 +1,6 @@
 import datetime
+import urllib2
 from urllib import urlencode
-from urllib2 import urlopen
 
 try:
     import json
@@ -18,11 +18,26 @@ class Pollster(object):
     API_BASE = '/pollster/api'
 
     def _build_request_url(self, path, params={}):
-        return "http://%s%s/%s?%s" % (self.API_SERVER, self.API_BASE, path, urlencode(params))
+        url = "http://%s%s/%s" % (self.API_SERVER, self.API_BASE, path)
+        if params:
+          url += "?%s" % urlencode(params)
+        print url
+        return url
 
     def _invoke(self, path, params={}):
         url = self._build_request_url(path, params)
-        response = urlopen(url)
+        try:
+            response = urllib2.urlopen(url)
+        except urllib2.HTTPError, e:
+            res = e.read()
+            msg = "An error occurred. URL: %s" % url
+            try:
+                msg = json.loads(res)
+                if msg.has_key('errors'):
+                    msg = msg['errors'][0]
+            except:
+                pass
+            raise PollsterException, msg
 
         if response.msg == 'OK':
             return json.loads(response.read())
