@@ -15,7 +15,7 @@ which provides access to political opinion polling data and trend estimates from
 See the current estimate of the president's job approval
 
     chart = pollster.charts(topic='obama-job-approval')[0]
-    print chart.estimates
+    chart.estimates
 
 List charts about 2012 Senate races
 
@@ -31,12 +31,12 @@ Calculate the margin between Obama and Romney from a recent general election pol
     question = [x['subpopulations'][0] for x in poll.questions if x['chart'] == '2012-general-election-romney-vs-obama'][0]
     obama = [x for x in question['responses'] if x['choice'] == 'Obama'][0]
     romney = [x for x in question['responses'] if x['choice'] == 'Romney'][0]
-    print obama['value'] - romney['value']
+    obama['value'] - romney['value']
 
 See the methodology used in recent polls about the Affordable Care Act
 
     chart = pollster.chart(slug='us-health-bill')
-    print [[x.pollster, x.method] for x in chart.polls()]
+    [[x.pollster, x.method] for x in chart.polls()]
 
 ## Authors
 
