@@ -1,4 +1,4 @@
-# pollster
+# Pollster
 
 A Python wrapper for the [Pollster API](http://elections.huffingtonpost.com/pollster/api) 
 which provides access to political opinion polling data and trend estimates from The Huffington Post.
