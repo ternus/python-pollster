@@ -15,7 +15,7 @@ which provides access to political opinion polling data and trend estimates from
 See the current estimate of the president's job approval
 
     chart = pollster.charts(topic='obama-job-approval')[0]
-    print chart.esimtates
+    print chart.estimates
 
 List charts about 2012 Senate races
 
