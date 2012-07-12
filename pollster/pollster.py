@@ -102,7 +102,9 @@ class Poll(object):
                  'end_date',
                  'method',
                  'source',
-                 'questions', ]
+                 'questions',
+                 'survey_houses',
+                 'sponsors' ]
         for key, val in result.iteritems():
             setattr(self, key, val)
 
