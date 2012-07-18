@@ -10,7 +10,7 @@ setup(
     author_email='bycoffe@huffingtonpost.com',
     description="A Python wrapper for the Pollster API",
     long_description="A Python wrapper for the Pollster API",
-    url='https://github.com/huffingtonpost/python-pollster',
+    url='https://github.com/huffpostdata/python-pollster',
     classifiers=[
                  'Intended Audience :: Developers',
                  'License :: OSI Approved :: BSD License',
