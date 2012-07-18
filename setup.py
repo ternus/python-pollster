@@ -8,8 +8,8 @@ setup(
     license='BSD',
     author='Aaron Bycoffe',
     author_email='bycoffe@huffingtonpost.com',
-    description="A Python wrapper for the Pollster API"
-    long_description="A Python wrapper for the Pollster API"
+    description="A Python wrapper for the Pollster API",
+    long_description="A Python wrapper for the Pollster API",
     url='https://github.com/huffingtonpost/python-pollster',
     classifiers=[
                  'Intended Audience :: Developers',
