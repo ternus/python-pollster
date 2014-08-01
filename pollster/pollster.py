@@ -104,7 +104,9 @@ class Poll(object):
                  'source',
                  'questions',
                  'survey_houses',
-                 'sponsors' ]
+                 'sponsors',
+                 'partisan',
+                 'affiliation' ]
         for key, val in result.iteritems():
             setattr(self, key, val)
 
