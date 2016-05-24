@@ -21,7 +21,6 @@ class Pollster(object):
         url = "http://%s%s/%s" % (self.API_SERVER, self.API_BASE, path)
         if params:
           url += "?%s" % urlencode(params)
-        print url
         return url
 
     def _invoke(self, path, params={}):
