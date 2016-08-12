@@ -8,7 +8,7 @@ except ImportError:
 
 
 class PollsterException(Exception):
-  pass
+    pass
 
 
 class Pollster(object):
@@ -19,7 +19,7 @@ class Pollster(object):
     def _build_request_url(self, path, params={}):
         url = "http://%s%s/%s" % (self.API_SERVER, self.API_BASE, path)
         if params:
-          url += "?%s" % urlencode(params)
+            url += "?%s" % urlencode(params)
         return url
 
     def _invoke(self, path, params={}):
@@ -84,8 +84,8 @@ class Chart(object):
                 self._estimates_by_date = chart._estimates_by_date
                 return self.estimates_by_date()
             except IndexError:
-                raise PollsterException("Can't find chart with slug: %s", self.slug)
-
+                raise PollsterException("Can't find chart with slug: %s",
+                                        self.slug)
 
     def __repr__(self):
         return '<Chart: %s>' % self.title
@@ -104,9 +104,10 @@ class Poll(object):
                  'survey_houses',
                  'sponsors',
                  'partisan',
-                 'affiliation' ]
+                 'affiliation']
         for key, val in result.iteritems():
             setattr(self, key, val)
 
     def __repr__(self):
-        return '<Poll: %s (%s - %s)>' % (self.pollster, self.start_date, self.end_date)
+        return '<Poll: %s (%s - %s)>' % (self.pollster, self.start_date,
+                                         self.end_date)
