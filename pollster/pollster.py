@@ -1,4 +1,3 @@
-import datetime
 import urllib2
 from urllib import urlencode
 
