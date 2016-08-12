@@ -3,7 +3,7 @@ from urllib import urlencode
 
 try:
     import json
-except ImportErorr:
+except ImportError:
     import simplejson as json
 
 
