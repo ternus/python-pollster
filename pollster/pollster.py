@@ -24,13 +24,17 @@ class Pollster(object):
     API_SERVER = 'elections.huffingtonpost.com'
     API_BASE = '/pollster/api'
 
-    def _build_request_url(self, path, params={}):
+    def _build_request_url(self, path, params=None):
+        if params is None:
+            params = {}
         url = "http://%s%s/%s" % (self.API_SERVER, self.API_BASE, path)
         if params:
             url += "?%s" % urlencode(params)
         return url
 
-    def _invoke(self, path, params={}):
+    def _invoke(self, path, params=None):
+        if params is None:
+            params = {}
         url = self._build_request_url(path, params)
         try:
             response = urllib2.urlopen(url)
