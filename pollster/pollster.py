@@ -1,3 +1,9 @@
+
+"""
+Methods for accessing the HuffPost Pollster API. Documentation for this API
+may be found at http://elections.huffingtonpost.com/pollster/api.
+"""
+
 import urllib2
 from urllib import urlencode
 
@@ -8,10 +14,12 @@ except ImportError:
 
 
 class PollsterException(Exception):
+    """General exception raised by the Pollster API."""
     pass
 
 
 class Pollster(object):
+    """Base object for accessing the Pollster API."""
 
     API_SERVER = 'elections.huffingtonpost.com'
     API_BASE = '/pollster/api'
@@ -43,17 +51,24 @@ class Pollster(object):
         raise PollsterException('Invalid response returned: %s', response.msg)
 
     def charts(self, **kwargs):
+        """Return a list of charts matching the specified parameters."""
         return [Chart(result) for result in self._invoke('charts', kwargs)]
 
     def chart(self, slug, **kwargs):
+        """Return a specific chart matching the slug, optionally specifying
+        parameters."""
         result = self._invoke('charts/%s' % slug, kwargs)
         return Chart(result)
 
     def polls(self, **kwargs):
+        """Return a list of polls matching the specified parameters."""
         return [Poll(result) for result in self._invoke('polls', kwargs)]
 
 
 class Chart(object):
+    """Represents a chart of estimates on a specific topic (e.g.
+    `obama-job-approval` or `2016-president`). Don't construct this directly;
+    instead, call Pollster().chart(slug)."""
 
     def __init__(self, result):
         valid = ['last_updated',
@@ -72,10 +87,13 @@ class Chart(object):
             self._estimates_by_date = result['estimates_by_date']
 
     def polls(self, **kwargs):
+        """Returns polls matching specified parameters."""
         kwargs['chart'] = self.slug
         return Pollster().polls(**kwargs)
 
     def estimates_by_date(self):
+        """Returns (if necessary retrieving first) a list of estimates for
+        this chart."""
         if hasattr(self, '_estimates_by_date'):
             return self._estimates_by_date
         else:
@@ -92,6 +110,8 @@ class Chart(object):
 
 
 class Poll(object):
+    """Represents a single poll. Don't construct this directly;
+    instead, call e.g. `Pollster().polls(chart='obama-job-approval')`."""
 
     def __init__(self, result):
         valid = ['id',
