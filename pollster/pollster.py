@@ -103,7 +103,7 @@ class Chart(object):
         else:
             try:
                 chart = Pollster().chart(slug=self.slug)
-                self._estimates_by_date = chart._estimates_by_date
+                self._estimates_by_date = chart.estimates_by_date()
                 return self.estimates_by_date()
             except IndexError:
                 raise PollsterException("Can't find chart with slug: %s",
