@@ -1,0 +1,5 @@
+[TYPECHECK]
+generated-members=slug,title,pollster,start_date,end_date
+
+[DESIGN]
+min-public-methods=0
