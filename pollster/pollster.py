@@ -38,15 +38,15 @@ class Pollster(object):
         url = self._build_request_url(path, params)
         try:
             response = urllib2.urlopen(url)
-        except urllib2.HTTPError, e:
-            res = e.read()
+        except urllib2.HTTPError as url_exc:
+            res = url_exc.read()
             msg = "An error occurred. URL: %s" % url
             try:
-                msg = json.loads(res)
-                if msg.has_key('errors'):
-                    msg = msg['errors'][0]
-            except:
-                pass
+                r_msg = dict(json.loads(res))
+                if r_msg.has_key('errors'):
+                    msg = r_msg['errors'][0]
+            except ValueError as exc:
+                raise exc
             raise PollsterException, msg
 
         if response.msg == 'OK':
