@@ -130,7 +130,8 @@ class Poll(object):
                  'partisan',
                  'affiliation']
         for key, val in result.iteritems():
-            setattr(self, key, val)
+            if key in valid:
+                setattr(self, key, val)
 
     def __repr__(self):
         return '<Poll: %s (%s - %s)>' % (self.pollster, self.start_date,
