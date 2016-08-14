@@ -34,3 +34,16 @@ class TestBasic(unittest.TestCase):
     def test_polls(self):
         polls = Pollster().polls(topic='2016-president')
         self.assertGreater(len(polls), 0)
+        poll = polls[0]
+        for attr in     ['id',
+                         'pollster',
+                         'start_date',
+                         'end_date',
+                         'method',
+                         'source',
+                         'questions',
+                         'survey_houses',
+                         'sponsors',
+                         'partisan',
+                         'affiliation']:
+             self.assertIsNotNone(getattr(poll, attr))
