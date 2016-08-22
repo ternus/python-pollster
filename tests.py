@@ -1,5 +1,6 @@
 import unittest
-from pollster.pollster import Pollster, Chart
+import urllib2
+from pollster.pollster import Pollster, Chart, PollsterException
 
 class TestBasic(unittest.TestCase):
 
@@ -47,3 +48,13 @@ class TestBasic(unittest.TestCase):
                          'partisan',
                          'affiliation']:
              self.assertIsNotNone(getattr(poll, attr))
+
+    def test_pollster_bad_site(self):
+        c = Pollster()
+        c.API_BASE = "/not/the/api/"
+        self.assertRaises(PollsterException, c.charts)
+
+    def test_pollster_404(self):
+        c = Pollster()
+        self.assertRaises(PollsterException, c.chart, "nonexistent-chart")
+        self.assertRaises(PollsterException, c.polls, bad_param="bad")
