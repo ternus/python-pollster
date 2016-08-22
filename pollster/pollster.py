@@ -46,7 +46,7 @@ class Pollster(object):
             try:
                 r_msg = dict(json.loads(res))
                 if r_msg.has_key('errors'):
-                    msg += "[%s]" % r_msg['errors'][0]
+                    msg += " [%s]" % r_msg['errors'][0]
             except ValueError:
                 pass
             raise PollsterException, msg
